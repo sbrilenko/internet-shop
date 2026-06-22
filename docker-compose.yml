@@ -1,0 +1,21 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgres://user:password@db:5432/database
+      - AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY
+      - AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY
+      - AWS_REGION=YOUR_REGION
+      - COGNITO_USER_POOL_ID=YOUR_USER_POOL_ID
+      - COGNITO_CLIENT_ID=YOUR_CLIENT_ID
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=database
